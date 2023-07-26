@@ -36,6 +36,9 @@ php artisan migrate
 
 ## Getting authentication ready
 
+We need to use breeze 1.9.4, because we are using Laravel 8.
+For Laravel 9, it will be possible to use breeze 1.10 with Vite support
+
 ```
 composer require laravel/breeze --dev
 php artisan breeze:install blade

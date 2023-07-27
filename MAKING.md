@@ -47,3 +47,11 @@ npm install
 npm run dev
 ```
 
+## Adding Svelte (initial attempt)
+
+```
+npm create vite@latest client -- --template svelte-ts
+cd client
+npm install
+```
+

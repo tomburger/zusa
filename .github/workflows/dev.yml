@@ -36,3 +36,4 @@ jobs:
             **/config/**
             **/tests/**
             **/node_modules/**
+            **/vendor/**

@@ -35,7 +35,7 @@ jobs:
         uses: garygrossgarten/github-action-ssh@release
         with:
           command: |
-            cd /home/zusa_burger_software/server
+            cd /home/www/burger.software/zusa.burger_software/server
             composer update
           host: replikant3692.thinline.cz
           port: 2736

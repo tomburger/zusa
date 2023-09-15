@@ -27,9 +27,12 @@ jobs:
         with:
           server: replikant3692.thinline.cz
           username: zusa_burger_software
-          password: xxxx
+          password: ${{ secrets.ZUSABURGERSOFTWAREFTPSECRET }}}
           port: 21
           protocol: ftp
           local-dir: server/
           server-dir: ./
-          exclude: tests
+          exclude: | 
+            **/config/**
+            **/tests/**
+            **/node_modules/**

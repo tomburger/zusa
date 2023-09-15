@@ -34,7 +34,9 @@ jobs:
       - name: Run composer on server
         uses: garygrossgarten/github-action-ssh@release
         with:
-          command: composer update
+          command: |
+            cd /home/zusa_burger_software/server
+            composer update
           host: replikant3692.thinline.cz
           port: 2736
           username: burger_software

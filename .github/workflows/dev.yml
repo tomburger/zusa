@@ -20,12 +20,12 @@ jobs:
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: replikant3692.thinline.cz
-          username: zusa_burger_software
-          password: ${{ secrets.ZUSABURGERSOFTWAREFTPSECRET }}
+          username: burger_software
+          password: ${{ secrets.BURGERSOFTWARESFTPSECRET }}
           port: 21
           protocol: ftp
           local-dir: server/
-          server-dir: ./
+          server-dir: zusa.burger.software
           exclude: | 
             **/tests/**
             **/node_modules/**

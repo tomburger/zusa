@@ -25,7 +25,7 @@ jobs:
           port: 21
           protocol: ftp
           local-dir: server/
-          server-dir: zusa.burger.software
+          server-dir: zusa.burger.software/
           exclude: | 
             **/tests/**
             **/node_modules/**

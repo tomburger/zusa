@@ -39,7 +39,7 @@ jobs:
             **/node_modules/**
             **/vendor/**
 
-      - name: Run composer on server
+      - name: Run Deployment Script on Server
         uses: garygrossgarten/github-action-ssh@release
         with:
           command: |

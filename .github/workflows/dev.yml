@@ -39,23 +39,12 @@ jobs:
             **/node_modules/**
             **/vendor/**
 
-      - name: Run composer on server
+      - name: Run Deployment Script on Server
         uses: garygrossgarten/github-action-ssh@release
         with:
           command: |
             cd zusa.burger.software
-            composer update
-          host: replikant3692.thinline.cz
-          port: 2736
-          username: burger_software
-          password: ${{ secrets.BURGERSOFTWARESFTPSECRET }}
-
-      - name: Run migrations on server
-        uses: garygrossgarten/github-action-ssh@release
-        with:
-          command: |
-            cd zusa.burger.software
-            @php artisan migrate --force
+            ./deployment/run.sh
           host: replikant3692.thinline.cz
           port: 2736
           username: burger_software

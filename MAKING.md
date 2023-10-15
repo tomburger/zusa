@@ -48,13 +48,13 @@ npm install
 npm run dev
 ```
 
-# Making deployment script to hosting
+## Making deployment script to hosting
 
 See .github/workflows/dev.yml for details
 
 Important: on hosting .htaccess has to be enabled and AllowOverride All has to be set in Apache configuration
 
-# First database table
+## First database table
 
 Create controller VendorController
 
@@ -73,4 +73,3 @@ Then create migration and run it
 ```bash
 php artisan make:migration 
 ```
-

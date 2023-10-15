@@ -47,3 +47,30 @@ php artisan migrate
 npm install
 npm run dev
 ```
+
+# Making deployment script to hosting
+
+See .github/workflows/dev.yml for details
+
+Important: on hosting .htaccess has to be enabled and AllowOverride All has to be set in Apache configuration
+
+# First database table
+
+Create controller VendorController
+
+```bash
+php artisan make:controller VendorController --rresource
+```
+
+Then create model Vendor
+
+```bash
+php artisan make:model Vendor -m
+```
+
+Then create migration and run it
+
+```bash
+php artisan make:migration 
+```
+

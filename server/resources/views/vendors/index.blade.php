@@ -1,24 +1,47 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+        <h2>
             {{ __('Vendors') }}
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+    <div class="row">
+        <div class="col">
+            <nav class="nav justify-content-end">
                 <x-primary-link :href="route('vendors.create')">{{ __('New Vendor') }}</x-primary-link>
-                <div class="max-w-xl">
-                    <table>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Notes</th>
-                        </tr>
+            </nav>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            @if ($vendors->isEmpty())
+                <x-alert-info>{{ __('No vendors found.') }}</x-alert-info>
+            @else
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>{{ __('ID') }}</th>
+                                <th>{{ __('Name') }}</th>
+                                <th>{{ __('Notes') }}</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($vendors as $vendor)
+                                <tr>
+                                    <td>{{ $vendor->id }}</td>
+                                    <td>{{ $vendor->name }}</td>
+                                    <td>{{ substr($vendor->notes, 0, 100) }}</td>
+                                    <td class="text-end">
+                                        <x-secondary-link :href="route('vendors.edit', ['vendor'=> $vendor->id])"><i class="bi bi-pencil-fill"></i></x-secondary-link>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
                     </table>
                 </div>
-            </div>
+            @endif
         </div>
     </div>
 

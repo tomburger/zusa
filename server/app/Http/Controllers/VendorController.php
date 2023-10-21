@@ -23,7 +23,7 @@ class VendorController extends Controller
      */
     public function create()
     {
-        if (Gate::allows("vendor-create", Auth::user())) {
+        if (Gate::denies("vendor-create", Auth::user())) {
             abort(403);
         }
 
@@ -35,13 +35,15 @@ class VendorController extends Controller
      */
     public function store(Request $request)
     {
-        if (Gate::allows("vendor-create", Auth::user())) {
-            $post = new Vendor();
-            $post->name = $request->input("name");
-            $post->notes = $request->input("notes");
-            if ($post->save()) {
-                return redirect()->route('vendors.index')->with('success', 'Vendor created successfully.');
-            }
+        if (Gate::denies("vendor-create", Auth::user())) {
+            abort(403);
+        }
+
+        $post = new Vendor();
+        $post->name = $request->input("name");
+        $post->notes = $request->input("notes");
+        if ($post->save()) {
+            return redirect()->route('vendors.index')->with('success', 'Vendor created successfully.');
         }
     }
 
@@ -59,7 +61,7 @@ class VendorController extends Controller
      */
     public function edit(string $id)
     {
-        if (Gate::allows("vendor-edit", Auth::user())) {
+        if (Gate::denies("vendor-edit", Auth::user())) {
             abort(403);
         }
 
@@ -72,13 +74,15 @@ class VendorController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        if (Gate::allows("vendor-edit", Auth::user())) {
-            $post = Vendor::findOrFail($id);
-            $post->name = $request->input("name");
-            $post->notes = $request->input("notes");
-            if ($post->save()) {
-                return redirect()->route('vendors.index')->with('success', 'Vendor created successfully.');
-            }
+        if (Gate::denies("vendor-edit", Auth::user())) {
+            abort(403);
+        }
+
+        $post = Vendor::findOrFail($id);
+        $post->name = $request->input("name");
+        $post->notes = $request->input("notes");
+        if ($post->save()) {
+            return redirect()->route('vendors.index')->with('success', 'Vendor created successfully.');
         }
     }
 

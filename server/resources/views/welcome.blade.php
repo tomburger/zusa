@@ -23,7 +23,7 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>                    
                     <div class="collapse navbar-collapse" id="navbarId">
-                        <ul class="navbar-nav me-end">
+                        <ul class="navbar-nav ms-auto">
                             @if (Route::has('login'))
                                 @auth
                                     <li class="nav-item">

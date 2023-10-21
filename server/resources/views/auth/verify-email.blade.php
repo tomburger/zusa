@@ -5,30 +5,26 @@
         </div>
 
         @if (session('status') == 'verification-link-sent')
-            <div class="mt-4">
+            <div class="alert alert-success">
                 {{ __('A new verification link has been sent to the email address you provided during registration.') }}
             </div>
         @endif
 
-        <div class="mt-4">
-            <form method="POST" action="{{ route('verification.send') }}">
-                @csrf
+        <form method="POST" action="{{ route('verification.send') }}">
+            @csrf
 
-                <div>
-                    <x-primary-button>
-                        {{ __('Resend Verification Email') }}
-                    </x-primary-button>
-                </div>
-            </form>
-        </div>
-        <div class="mt-4">
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
+            <div>
+                <x-primary-button>
+                    {{ __('Resend Verification Email') }}
+                </x-primary-button>
+            </div>
+        </form>
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
 
-                <x-secondary-button type="submit">
-                    {{ __('Log Out') }}
-                </x-secondary-button>
-            </form>
-        </div>
+            <x-secondary-button type="submit">
+                {{ __('Log Out') }}
+            </x-secondary-button>
+        </form>
     </x-narrow>
 </x-guest-layout>

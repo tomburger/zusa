@@ -4,7 +4,7 @@
             {{ __('This is a secure area of the application. Please confirm your password before continuing.') }}
         </div>
 
-        <div class="mt-4">
+        <div class="">
             <form method="POST" action="{{ route('password.confirm') }}">
                 @csrf
 
@@ -15,7 +15,7 @@
                     <x-input-error :messages="$errors->get('password')" class="mt-2" />
                 </div>
 
-                <div class="mt-4">
+                <div>
                     <x-primary-button>
                         {{ __('Confirm') }}
                     </x-primary-button>

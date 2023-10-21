@@ -14,20 +14,20 @@
             </div>
 
             <!-- Password -->
-            <div class="mt-4">
+            <div>
                 <x-input-label for="password" :value="__('Password')" />
                 <x-text-input id="password" type="password" name="password" required autocomplete="new-password" />
                 <x-input-error :messages="$errors->get('password')" class="mt-2" />
             </div>
 
             <!-- Confirm Password -->
-            <div class="mt-4">
+            <div>
                 <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
                 <x-text-input id="password_confirmation" type="password"name="password_confirmation" required autocomplete="new-password" />
                 <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
             </div>
 
-            <div class="mt-4">
+            <div>
                 <x-primary-button>
                     {{ __('Reset Password') }}
                 </x-primary-button>

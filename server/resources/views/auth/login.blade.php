@@ -1,6 +1,6 @@
 <x-guest-layout>
     <x-narrow>
-        <img src="{{ asset('img/welcome.jpg') }}" class="img-fluid rounded mb-4" alt="Welcome to the cloud">
+        <img src="{{ asset('img/welcome.jpg') }}" class="img-fluid rounded" alt="Welcome to the cloud">
         
         <!-- Session Status -->
         <x-auth-session-status class="mb-4" :status="session('status')" />
@@ -16,26 +16,26 @@
             </div>
 
             <!-- Password -->
-            <div class="mt-4">
+            <div>
                 <x-input-label for="password" :value="__('Password')" />
                 <x-text-input id="password"  type="password" name="password" required autocomplete="current-password" />
                 <x-input-error :messages="$errors->get('password')" class="mt-2" />
             </div>
 
             <!-- Remember Me -->
-            <div class="mt-4">
+            <div>
                 <input id="remember_me" type="checkbox" class="form-check-input" name="remember">
                 <label for="remember_me" class="form-check-label">{{ __('Remember me') }}</label>
             </div>
 
-            <div class="mt-4">
+            <div>
                 <x-primary-button class="ml-3">
                     {{ __('Log in') }}
                 </x-primary-button>
             </div>
 
             @if (Route::has('password.request'))
-                <div class="mt-4">
+                <div>
                     <a class="" href="{{ route('password.request') }}">
                         {{ __('Forgot your password?') }}
                     </a>

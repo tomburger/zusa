@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <div style="max-width: 440px; margin: 0 auto;">
+    <x-narrow>
         <img src="{{ asset('img/welcome.jpg') }}" class="img-fluid rounded mb-4" alt="Welcome to the cloud">
 
         <form method="POST" action="{{ route('register') }}">
@@ -45,5 +45,5 @@
                 </a>
             </div>
         </form>
-    </div>  
+    </x-narrow>  
 </x-guest-layout>

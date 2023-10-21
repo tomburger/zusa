@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <div style="max-width: 440px; margin: 0 auto;">
+    <x-narrow>
         <img src="{{ asset('img/welcome.jpg') }}" class="img-fluid rounded mb-4" alt="Welcome to the cloud">
         
         <!-- Session Status -->
@@ -42,5 +42,5 @@
                 </div>
             @endif
         </form>
-    </div>
+    </x-narrow>
 </x-guest-layout>

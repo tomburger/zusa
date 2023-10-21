@@ -59,7 +59,7 @@ Important: on hosting .htaccess has to be enabled and AllowOverride All has to b
 Create controller VendorController
 
 ```bash
-php artisan make:controller VendorController --rresource
+php artisan make:controller VendorController --resource
 ```
 
 Then create model Vendor
@@ -73,3 +73,12 @@ Then create migration and run it
 ```bash
 php artisan make:migration 
 ```
+
+## First view
+
+We first create a policies and gates
+
+Then we create index, create and edit view
+
+We also replaced Tailwind with Bootstrap and then all elements come without class at all.
+All class (a few) are defined in components.

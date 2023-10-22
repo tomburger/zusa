@@ -82,3 +82,11 @@ Then we create index, create and edit view
 
 We also replaced Tailwind with Bootstrap and then all elements come without class at all.
 All class (a few) are defined in components.
+
+## Extending users with authorization
+
+Add migration to add `active` and `profile`
+
+Controller for User; then create UserUi model for views; add DropdownModel for dropdowns, use it in UserUi to show difference between business logic object and UI model.
+
+Also add extra action to UserController to activate and deactivate user

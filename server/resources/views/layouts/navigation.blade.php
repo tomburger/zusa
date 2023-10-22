@@ -22,28 +22,38 @@
                     <x-nav-link :href="route('vendors.index')" :active="request()->routeIs('vendors.index')">
                         {{ __('Vendors') }}
                     </x-nav-link>
+                    <x-nav-dropdown>
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ __('Administration') }}
+                        </a>
+                        <ul class="dropdown-menu">
+                            <x-nav-dropdown-link :href="route('users.index')">
+                                {{ __('Users') }}
+                            </x-nav-dropdown-link>
+                        </ul>                                
+                    </x-nav-dropdown>
                 </ul>               
                 <ul class="navbar-nav ms-auto">
-                    <x-dropdown>
+                    <x-nav-dropdown>
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             {{ Auth::user()->name }}
                         </a>
                         <ul class="dropdown-menu">
-                            <x-dropdown-link :href="route('profile.edit')">
+                            <x-nav-dropdown-link :href="route('profile.edit')">
                                 {{ __('Profile') }}
-                            </x-dropdown-link>
+                            </x-nav-dropdown-link>
                             <!-- Authentication -->
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
 
-                                <x-dropdown-link :href="route('logout')"
+                                <x-nav-dropdown-link :href="route('logout')"
                                         onclick="event.preventDefault();
                                                     this.closest('form').submit();">
                                     {{ __('Log Out') }}
-                                </x-dropdown-link>
+                                </x-nav-dropdown-link>
                             </form>
                         </ul>                                
-                    </x-dropdown>
+                    </x-nav-dropdown>
                 </ul>
             </div>
             </div>

@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Models\DropdownModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -21,6 +23,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'active',
+        'profile'
     ];
 
     /**
@@ -42,4 +46,27 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+}
+
+class UserUi {
+    public string $id;
+    public string $name;
+    public string $email;
+    public bool $active;
+    public DropdownModel $profile;
+
+    public function __construct(User $user)
+    {
+        $this->id = $user->id;
+        $this->name = $user->name;
+        $this->email = $user->email;
+        $this->active = $user->active;
+        $this->profile = new DropdownModel($user->profile, [
+            "" => "",
+            "admin" => "Admin",
+            "controller" => "Controller",
+            "contributor" => "Contributor",
+            "reader" => "Reader",
+        ]);
+    }
 }

@@ -9,7 +9,7 @@ class contributor
 {
     use HandlesAuthorization;
     
-    public function isContributor(User $user): bool
+    public function has(User $user): bool
     {
         return true;
     }

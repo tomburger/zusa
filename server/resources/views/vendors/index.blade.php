@@ -14,6 +14,13 @@
     </div>
     <div class="row">
         <div class="col">
+            @if (session('success'))
+                <x-alert-success>{{ session('success') }}</x-alert-success>
+            @endif
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
             @if ($vendors->isEmpty())
                 <x-alert-info>{{ __('No vendors found.') }}</x-alert-info>
             @else

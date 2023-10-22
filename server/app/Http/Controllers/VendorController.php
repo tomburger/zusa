@@ -82,7 +82,7 @@ class VendorController extends Controller
         $post->name = $request->input("name");
         $post->notes = $request->input("notes");
         if ($post->save()) {
-            return redirect()->route('vendors.index')->with('success', 'Vendor created successfully.');
+            return redirect()->route('vendors.index')->with('success', "Vendor $post->name updated successfully.");
         }
     }
 

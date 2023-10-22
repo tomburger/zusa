@@ -9,7 +9,7 @@ class admin
 {
     use HandlesAuthorization;
 
-    public function isAdmin(User $user): bool
+    public function has(User $user): bool
     {
         return true;
     }

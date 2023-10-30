@@ -1,0 +1,21 @@
+<x-app-layout>
+    <x-slot name="header">
+        <h2>
+            {{ __('Create New Dimension') }}
+        </h2>
+    </x-slot>
+
+    <form method="post" action="{{ route('dimensions.store') }}">
+        @csrf
+        
+        <div>
+            <x-input-label for="name" :value="__('Name')" />
+            <x-text-input id="name" name="name" type="text" required autofocus autocomplete="name" />
+            <x-input-error class="mt-2" :messages="$errors->get('name')" />
+        </div>
+        <div>
+            <x-primary-button>{{ __('Save') }}</x-primary-button>
+            <x-secondary-link href="{{ route('dimensions.index') }}">{{ __('Cancel') }}</x-secondary-link>
+        </div>
+    </form>
+</x-app-layout>

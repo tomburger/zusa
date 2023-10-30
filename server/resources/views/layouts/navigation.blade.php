@@ -30,6 +30,9 @@
                             <x-nav-dropdown-link :href="route('users.index')">
                                 {{ __('Users') }}
                             </x-nav-dropdown-link>
+                            <x-nav-dropdown-link :href="route('dimensions.index')">
+                                {{ __('Dimensions') }}
+                            </x-nav-dropdown-link>
                         </ul>                                
                     </x-nav-dropdown>
                 </ul>               

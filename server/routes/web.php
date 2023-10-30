@@ -33,4 +33,7 @@ Route::resource('vendors', \App\Http\Controllers\VendorController::class)->middl
 Route::post('users/{user}/activate', [\App\Http\Controllers\UserController::class, 'activate'])->name('users.activate')->middleware('auth');
 Route::resource('users', \App\Http\Controllers\UserController::class)->middleware('auth');
 
+Route::post('dimensions/{dimension}/units', [\App\Http\Controllers\DimensionController::class, 'addUnit'])->name('dimensions.addUnit')->middleware('auth');
+Route::resource('dimensions', \App\Http\Controllers\DimensionController::class)->middleware('auth');
+
 require __DIR__.'/auth.php';

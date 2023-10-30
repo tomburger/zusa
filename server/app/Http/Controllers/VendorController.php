@@ -23,10 +23,6 @@ class VendorController extends Controller
      */
     public function create()
     {
-        if (Gate::denies("vendor-create", Auth::user())) {
-            abort(403);
-        }
-
         return view('vendors.create');
     }
 
@@ -35,10 +31,6 @@ class VendorController extends Controller
      */
     public function store(Request $request)
     {
-        if (Gate::denies("vendor-create", Auth::user())) {
-            abort(403);
-        }
-
         $post = new Vendor();
         $post->name = $request->input("name");
         $post->notes = $request->input("notes");
@@ -60,10 +52,6 @@ class VendorController extends Controller
      */
     public function edit(string $id)
     {
-        if (Gate::denies("vendor-edit", Auth::user())) {
-            abort(403);
-        }
-
         $vendor = Vendor::findOrFail($id); 
         return view('vendors.edit', compact('vendor'));
     }
@@ -73,10 +61,6 @@ class VendorController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        if (Gate::denies("vendor-edit", Auth::user())) {
-            abort(403);
-        }
-
         $post = Vendor::findOrFail($id);
         $post->name = $request->input("name");
         $post->notes = $request->input("notes");

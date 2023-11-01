@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }">
+<nav>
     <!-- Primary Navigation Menu -->
     <div class="navbar navbar-expand-sm bg-body-tertiary ps-2">
         <div class="container-fluid">
@@ -21,6 +21,9 @@
                     </x-nav-link>
                     <x-nav-link :href="route('vendors.index')" :active="request()->routeIs('vendors.index')">
                         {{ __('Vendors') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('products.index')" :active="request()->routeIs('products.index')">
+                        {{ __('Products') }}
                     </x-nav-link>
                     <x-nav-dropdown>
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

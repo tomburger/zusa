@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,5 +36,17 @@ Route::resource('users', \App\Http\Controllers\UserController::class)->middlewar
 
 Route::post('dimensions/{dimension}/units', [\App\Http\Controllers\DimensionController::class, 'addUnit'])->name('dimensions.addUnit')->middleware('auth');
 Route::resource('dimensions', \App\Http\Controllers\DimensionController::class)->middleware('auth');
+
+Route::resource('products', \App\Http\Controllers\ProductController::class)->middleware('auth');
+
+// we need an explicit routes, as we combine two models into a single controller
+Route::middleware('auth')->group(function () {
+    Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+    Route::get('/products/create/{type}', [ProductController::class, 'create'])->name('products.create');
+    Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+    Route::get('/products/{type}/{id}', [ProductController::class, 'show'])->name('products.show');
+    Route::get('/products/{type}/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
+    Route::patch('/products/{type}/{id}', [ProductController::class, 'update'])->name('products.update');
+});
 
 require __DIR__.'/auth.php';

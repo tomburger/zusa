@@ -1,16 +1,16 @@
 <x-app-layout>
     <x-slot name="header">
         <h2>
-            {{ __('Create New Product Category') }}
+            {{ __('Edit Product Category') }}: {{$prodcat->name}}
         </h2>
     </x-slot>
 
-    <form method="post" action="{{ route('products.store') }}">
+    <form method="post" action="{{ route('products.update', ['type'=>'category','id'=>$prodcat->id]) }}">
         @csrf
-        <input type="hidden" name="type" value="category">
+        @method('PATCH')
         <div>
             <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" name="name" type="text" required autofocus autocomplete="name" />
+            <x-text-input id="name" name="name" type="text" required autofocus autocomplete="name" value="{{$prodcat->name}}" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
         <div>

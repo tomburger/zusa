@@ -17,7 +17,7 @@ class ProductCategory extends Model
         'parent',
     ];
 
-    public function parent(): BelongsTo {
+    public function parentCategory(): BelongsTo {
         return $this->belongsTo(ProductCategory::class, 'parent');
     }   
 
@@ -28,26 +28,10 @@ class ProductCategory extends Model
     public function products(): HasMany {
         return $this->hasMany(Product::class);
     }
-}
 
-class ProductCategoryUi {
-    public int $id;
-    public string $name;
-    public DropDownModel $parent;
-    public Collection $categories;
-    public Collection $products;
-
-    public function __construct(ProductCategory $productCategory = null)
-    {
-        if ($productCategory) {
-            $this->id = $productCategory->id;
-            $this->name = $productCategory->name;
-            $this->categories = $productCategory->categories()->get();
-            $this->products = $productCategory->products()->get();
-            //$this->parent = new DropdownModel($productCategory->parent, ProductCategory::get());
-        }
-        else {
-            //$this->parent = new DropdownModel(null, ProductCategory::get());
-        }
+    public function parentDropdown(): DropdownModel {
+        $categories = ProductCategory::get()->pluck('name', 'id');
+        $categories->prepend('', '');
+        return new DropdownModel($this->parent, $categories);
     }
 }

@@ -30,9 +30,21 @@ class ProductController extends Controller
         }
         if ($type == 'product') { 
             $product = new Product();
+            $product->product_category_id = $request->input("parent");
             return view('products.product.create', compact('product'));
         }
         throw new \Exception('Invalid request type $type');
+    }
+
+    private function toParent($parent) {
+        $result = redirect();
+        if ($parent) {
+            $result = $result->route('products.show', ['type' => 'category', 'id' => $parent]);
+        } 
+        else {
+            $result = $result->route('products.index');
+        }
+        return $result->with('success', 'Processed successfully.');
     }
 
     /**
@@ -45,24 +57,17 @@ class ProductController extends Controller
             $post->name = $request->input("name");
             $post->parent = $request->input("parent");
             if ($post->save()) {
-                $result = redirect();
-                if ($post->parent) {
-                    $result = $result->route('products.show', ['type' => 'category', 'id' => $post->parent]);
-                } 
-                else {
-                    $result = $result->route('products.index');
-                }
-                return $result->with('success', 'Product category created successfully.');
+                return $this->toParent($post->parent);
             }
         }
         if ($request->input("type") == "product") {
             $post = new Product();
             $post->name = $request->input("name");
-            $post->product_category_id = $request->input("product_category_id");
-            $post->vendor_id = $request->input("vendor_id");
-            $post->dimension_id = $request->input("dimension_id");
+            $post->product_category_id = $request->input("parent");
+            $post->vendor_id = $request->input("vendor");
+            $post->dimension_id = $request->input("dimension");
             if ($post->save()) {
-                return redirect()->route('products.index')->with('success', 'Product created successfully.');
+                return $this->toParent($post->product_category_id);
             }
         }
     }
@@ -109,17 +114,17 @@ class ProductController extends Controller
             $post->name = $request->input("name");
             $post->parent = $request->input("parent");
             if ($post->save()) {
-                return redirect()->route('products.index')->with('success', "Product category $post->name updated successfully.");
+                return $this->toParent($post->parent);
             }
         }
         if ($type == "product") {
             $post = Product::findOrFail($id);
             $post->name = $request->input("name");
-            $post->product_category_id = $request->input("product_category_id");
-            $post->vendor_id = $request->input("vendor_id");
-            $post->dimension_id = $request->input("dimension_id");
+            $post->product_category_id = $request->input("parent");
+            $post->vendor_id = $request->input("vendor");
+            $post->dimension_id = $request->input("dimension");
             if ($post->save()) {
-                return redirect()->route('products.index')->with('success', "Product $post->name updated successfully.");
+                return $this->toParent($post->product_category_id);
             }
         }
     }

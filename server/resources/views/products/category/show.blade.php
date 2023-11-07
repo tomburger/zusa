@@ -5,24 +5,16 @@
         </h2>
     </x-slot>
 
-    @if ($prodcat->parentCategory)
-        <div class="row">
-            <div class="col">
-                {{ __('Parent') }}: {{$prodcat->parentCategory->name}}
-            </div>
-        </div>
-    @endif
-
     <div class="row">
         <div class="col">
             <nav class="nav justify-content-end">
                 @if ($prodcat->parent)
-                    <x-primary-link class="me-2" :href="route('products.show', ['type'=>'category','id'=>$prodcat->parent])"><i class="bi bi-arrow-left-square"></i> {{ __('Back') }}</x-primary-link>
+                    <x-primary-link class="me-2" :href="route('products.show', ['type'=>'category','id'=>$prodcat->parent])"><i class="bi bi-arrow-left-square"></i> {{$prodcat->parentCategory->name}}</x-primary-link>
                 @else
-                    <x-primary-link class="me-2" :href="route('products.index')"><i class="bi bi-arrow-left-square"></i> {{ __('Back') }}</x-primary-link>
+                    <x-primary-link class="me-2" :href="route('products.index')"><i class="bi bi-arrow-left-square"></i> {{ __('Products') }}</x-primary-link>
                 @endif
                 <x-primary-link class="me-2" :href="route('products.create', ['type'=>'category','parent'=>$prodcat->id])">{{ __('New Category') }}</x-primary-link>
-                <x-primary-link :href="route('products.create', ['type'=>'product'])">{{ __('New Product') }}</x-primary-link>
+                <x-primary-link :href="route('products.create', ['type'=>'product','parent'=>$prodcat->id])">{{ __('New Product') }}</x-primary-link>
             </nav>
         </div>
     </div>

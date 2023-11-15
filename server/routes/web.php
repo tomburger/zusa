@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,6 +31,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::resource('vendors', \App\Http\Controllers\VendorController::class)->middleware('auth');
+Route::resource('vendors.contacts', \App\Http\Controllers\ContactController::class)->middleware('auth');
 
 Route::post('users/{user}/activate', [\App\Http\Controllers\UserController::class, 'activate'])->name('users.activate')->middleware('auth');
 Route::resource('users', \App\Http\Controllers\UserController::class)->middleware('auth');

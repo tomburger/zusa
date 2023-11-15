@@ -41,6 +41,7 @@
                                     <td>{{ $vendor->name }}</td>
                                     <td>{{ substr($vendor->notes, 0, 100) }}</td>
                                     <td class="text-end">
+                                        <x-secondary-link :href="route('vendors.show', ['vendor'=> $vendor->id])"><i class="bi bi-eye-fill"></i></x-secondary-link>
                                         <x-secondary-link :href="route('vendors.edit', ['vendor'=> $vendor->id])"><i class="bi bi-pencil-fill"></i></x-secondary-link>
                                     </td>
                                 </tr>

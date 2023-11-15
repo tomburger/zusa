@@ -103,6 +103,11 @@ Then model > controller > views
 
 ## Exercise: new entity Warehouse
 
-controller > migration (fill) > model > migrate > route
+controller > model > migration (fill) > migrate > route
 setup navigation
 fill controller > create views
+
+## Secondary entity - contact (embedded into vendor)
+
+controller > migration (fill) > model > migrate
+only special routes to access contacts within vendor

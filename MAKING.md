@@ -90,3 +90,13 @@ Add migration to add `active` and `profile`
 Controller for User; then create UserUi model for views; add DropdownModel for dropdowns, use it in UserUi to show difference between business logic object and UI model.
 
 Also add extra action to UserController to activate and deactivate user
+
+## Two level hierarchical editor for products
+
+## Adding new attribute to product - ExternalReference
+
+```bash
+php artisan make:migration add_product_external_reference --table=-products
+```
+
+Then model > controller > views

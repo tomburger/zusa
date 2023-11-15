@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2>
-            {{ __('Product') }}: {{$product->name}}
+            {{ __('Product') }}: {{$product->name}} ({{$product->external_reference}})
         </h2>
     </x-slot>
 

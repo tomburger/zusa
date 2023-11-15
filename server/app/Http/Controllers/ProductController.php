@@ -63,6 +63,7 @@ class ProductController extends Controller
         if ($request->input("type") == "product") {
             $post = new Product();
             $post->name = $request->input("name");
+            $post->external_reference = $request->input("external_reference");
             $post->product_category_id = $request->input("parent");
             $post->vendor_id = $request->input("vendor");
             $post->dimension_id = $request->input("dimension");
@@ -120,6 +121,7 @@ class ProductController extends Controller
         if ($type == "product") {
             $post = Product::findOrFail($id);
             $post->name = $request->input("name");
+            $post->external_reference = $request->input("external_reference");
             $post->product_category_id = $request->input("parent");
             $post->vendor_id = $request->input("vendor");
             $post->dimension_id = $request->input("dimension");

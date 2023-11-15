@@ -3,17 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Vendor;
+use App\Models\Warehouse;
 
-class VendorController extends Controller
+class WarehouseController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $vendors = Vendor::get();
-        return view('vendors.index', compact('vendors'));
+        $entries = Warehouse::get();
+        return view('warehouses.index', compact('entries'));
     }
 
     /**
@@ -21,7 +21,7 @@ class VendorController extends Controller
      */
     public function create()
     {
-        return view('vendors.create');
+        return view('warehouses.create');
     }
 
     /**
@@ -29,11 +29,11 @@ class VendorController extends Controller
      */
     public function store(Request $request)
     {
-        $post = new Vendor();
+        $post = new Warehouse();
         $post->name = $request->input("name");
         $post->notes = $request->input("notes");
         if ($post->save()) {
-            return redirect()->route('vendors.index')->with('success', 'Vendor created successfully.');
+            return redirect()->route('warehouses.index')->with('success', 'Warehouse created successfully.');
         }
     }
 
@@ -50,8 +50,8 @@ class VendorController extends Controller
      */
     public function edit(string $id)
     {
-        $vendor = Vendor::findOrFail($id); 
-        return view('vendors.edit', compact('vendor'));
+        $entry = Warehouse::findOrFail($id); 
+        return view('warehouses.edit', compact('entry'));
     }
 
     /**
@@ -59,11 +59,11 @@ class VendorController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $post = Vendor::findOrFail($id);
+        $post = Warehouse::findOrFail($id);
         $post->name = $request->input("name");
         $post->notes = $request->input("notes");
         if ($post->save()) {
-            return redirect()->route('vendors.index')->with('success', "Vendor $post->name updated successfully.");
+            return redirect()->route('warehouses.index')->with('success', "Warehouse $post->name updated successfully.");
         }
     }
 

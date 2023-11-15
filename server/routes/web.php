@@ -37,8 +37,6 @@ Route::resource('users', \App\Http\Controllers\UserController::class)->middlewar
 Route::post('dimensions/{dimension}/units', [\App\Http\Controllers\DimensionController::class, 'addUnit'])->name('dimensions.addUnit')->middleware('auth');
 Route::resource('dimensions', \App\Http\Controllers\DimensionController::class)->middleware('auth');
 
-Route::resource('products', \App\Http\Controllers\ProductController::class)->middleware('auth');
-
 // we need an explicit routes, as we combine two models into a single controller
 Route::middleware('auth')->group(function () {
     Route::get('/products', [ProductController::class, 'index'])->name('products.index');
@@ -48,5 +46,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/products/{type}/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
     Route::patch('/products/{type}/{id}', [ProductController::class, 'update'])->name('products.update');
 });
+
+Route::resource('warehouses', \App\Http\Controllers\WarehouseController::class)->middleware('auth');
 
 require __DIR__.'/auth.php';

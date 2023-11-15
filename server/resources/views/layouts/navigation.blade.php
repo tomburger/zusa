@@ -19,12 +19,22 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('vendors.index')" :active="request()->routeIs('vendors.index')">
-                        {{ __('Vendors') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('products.index')" :active="request()->routeIs('products.index')">
-                        {{ __('Products') }}
-                    </x-nav-link>
+                    <x-nav-dropdown>
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ __('Settings') }}
+                        </a>
+                        <ul class="dropdown-menu">
+                            <x-nav-dropdown-link :href="route('vendors.index')">
+                                {{ __('Vendors') }}
+                            </x-nav-dropdown-link>
+                            <x-nav-dropdown-link :href="route('warehouses.index')">
+                                {{ __('Warehouses') }}
+                            </x-nav-dropdown-link>
+                            <x-nav-dropdown-link :href="route('products.index')">
+                                {{ __('Products') }}
+                            </x-nav-dropdown-link>
+                        </ul>                                
+                    </x-nav-dropdown>
                     <x-nav-dropdown>
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             {{ __('Administration') }}

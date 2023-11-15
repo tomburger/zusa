@@ -100,3 +100,9 @@ php artisan make:migration add_product_external_reference --table=-products
 ```
 
 Then model > controller > views
+
+## Exercise: new entity Warehouse
+
+controller > migration (fill) > model > migrate > route
+setup navigation
+fill controller > create views

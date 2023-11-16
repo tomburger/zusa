@@ -110,4 +110,8 @@ fill controller > create views
 ## Secondary entity - contact (embedded into vendor)
 
 controller > migration (fill) > model > migrate
-only special routes to access contacts within vendor
+relations in models (contact and vendor)
+routes for embedded resources
+views (also add show view for vendor)
+
+

@@ -9,10 +9,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
+use Spatie\Permission\Models\Role;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -23,8 +25,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'active',
-        'profile'
+        'active'
     ];
 
     /**
@@ -53,6 +54,7 @@ class UserUi {
     public string $name;
     public string $email;
     public bool $active;
+    public bool $admin;
     public DropdownModel $profile;
 
     public function __construct(User $user)
@@ -61,12 +63,16 @@ class UserUi {
         $this->name = $user->name;
         $this->email = $user->email;
         $this->active = $user->active;
-        $this->profile = new DropdownModel($user->profile, [
-            "" => "",
-            "admin" => "Admin",
-            "controller" => "Controller",
-            "contributor" => "Contributor",
-            "reader" => "Reader",
-        ]);
+        $this->admin = $user->admin;
+    }
+
+    public function allRoles()
+    {
+        return Role::all();
+    }
+
+    public function hasRole(string $roleName)
+    {
+        return User::findOrFail($this->id)->hasRole($roleName);
     }
 }

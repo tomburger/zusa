@@ -13,8 +13,10 @@
                 @else
                     <x-primary-link class="me-2" :href="route('products.index')"><i class="bi bi-arrow-left-square"></i> {{ __('Products') }}</x-primary-link>
                 @endif
-                <x-primary-link class="me-2" :href="route('products.create', ['type'=>'category','parent'=>$prodcat->id])">{{ __('New Category') }}</x-primary-link>
-                <x-primary-link :href="route('products.create', ['type'=>'product','parent'=>$prodcat->id])">{{ __('New Product') }}</x-primary-link>
+                @can('product.write')
+                    <x-primary-link class="me-2" :href="route('products.create', ['type'=>'category','parent'=>$prodcat->id])">{{ __('New Category') }}</x-primary-link>
+                    <x-primary-link :href="route('products.create', ['type'=>'product','parent'=>$prodcat->id])">{{ __('New Product') }}</x-primary-link>
+                @endcan
             </nav>
         </div>
     </div>

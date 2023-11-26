@@ -25,7 +25,7 @@
                                 <th>{{ __('Name') }}</th>
                                 <th>{{ __('Email') }}</th>
                                 <th>{{ __('Active') }}</th>
-                                <th>{{ __('Profile') }}</th>
+                                <th>{{ __('Admin') }}</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -36,17 +36,23 @@
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
                                     @if ($user->active)
-                                    	<td class="text-success"><i class="bi bi-check-square"></i></td>
+                                    	<td class="bg-success"><i class="bi bi-check-square"></i></td>
                                     @else
-                                        <td class="text-warning"><i class="bi bi-check-square"></i></td>
+                                        <td class="bg-warning"><i class="bi bi-check-square"></i></td>
                                     @endif
-                                    <td>{{ $user->profile->getLabel() }}</td>
+                                    @if ($user->admin)
+                                    	<td class="bg-success"><i class="bi bi-check-square"></i></td>
+                                    @else
+                                        <td></td>
+                                    @endif
                                     <td class="text-end">
-                                        <form method="POST" style="display:inline-block;" action="{{ route('users.activate', ['user'=> $user->id]) }}">
-                                            @csrf
-                                            <x-secondary-button type="submit"><i class="bi bi-check-square"></i></x-secondary-link>
-                                        </form>
-                                        <x-secondary-link :href="route('users.edit', ['user'=> $user->id])"><i class="bi bi-pencil-fill"></i></x-secondary-link>
+                                        @can('user.write')
+                                            <form method="POST" style="display:inline-block;" action="{{ route('users.activate', ['user'=> $user->id]) }}">
+                                                @csrf
+                                                <x-secondary-button type="submit"><i class="bi bi-check-square"></i></x-secondary-link>
+                                            </form>
+                                            <x-secondary-link :href="route('users.edit', ['user'=> $user->id])"><i class="bi bi-pencil-fill"></i></x-secondary-link>
+                                        @endcan
                                     </td>
                                 </tr>
                             @endforeach

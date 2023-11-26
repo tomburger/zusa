@@ -13,6 +13,7 @@ class ProductController extends Controller
      */
     public function index()
     {
+        $this->authorize('product.read');
         $prodcats = ProductCategory::whereNull('parent')->get();
         $products = Product::whereNull('product_category_id')-> get();
         return view('products.index', compact('prodcats', 'products'));
@@ -23,6 +24,7 @@ class ProductController extends Controller
      */
     public function create(Request $request, string $type)
     {
+        $this->authorize('product.write');
         if ($type == 'category') { 
             $prodcat = new ProductCategory();
             $prodcat->parent = $request->input("parent");
@@ -52,6 +54,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('product.write');
         if ($request->input("type") == "category") {
             $post = new ProductCategory();
             $post->name = $request->input("name");
@@ -78,6 +81,7 @@ class ProductController extends Controller
      */
     public function show(string $type, string $id)
     {
+        $this->authorize('product.read');
         if ($type == 'category') { 
             $prodcat = ProductCategory::findOrFail($id);
             return view('products.category.show', compact('prodcat'));
@@ -94,6 +98,7 @@ class ProductController extends Controller
      */
     public function edit(string $type, string $id)
     {
+        $this->authorize('product.write');
         if ($type == 'category') { 
             $prodcat = ProductCategory::findOrFail($id);
             return view('products.category.edit', compact('prodcat'));
@@ -110,6 +115,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $type, string $id)
     {
+        $this->authorize('product.write');
         if ($type == "category") {
             $post = ProductCategory::findOrFail($id);
             $post->name = $request->input("name");

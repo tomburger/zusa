@@ -17,7 +17,9 @@
                     <td colspan="4">{{ $prodcat->name }}</td>
                     <td class="text-end">
                         <x-secondary-link :href="route('products.show', ['type'=>'category', 'id'=> $prodcat->id])"><i class="bi bi-arrow-right-square"></i></x-secondary-link>
-                        <x-secondary-link :href="route('products.edit', ['type'=>'category', 'id'=> $prodcat->id])"><i class="bi bi-pencil-fill"></i></x-secondary-link>
+                        @can('product.write')
+                            <x-secondary-link :href="route('products.edit', ['type'=>'category', 'id'=> $prodcat->id])"><i class="bi bi-pencil-fill"></i></x-secondary-link>
+                        @endcan
                     </td>
                 </tr>
             @endforeach
@@ -30,7 +32,9 @@
                     <td>{{ $product->dimension?->name }}</td>
                     <td class="text-end">
                         <x-secondary-link :href="route('products.show', ['type'=>'product', 'id'=> $product->id])"><i class="bi bi-eye-fill"></i></x-secondary-link>
-                        <x-secondary-link :href="route('products.edit', ['type'=>'product', 'id'=> $product->id])"><i class="bi bi-pencil-fill"></i></x-secondary-link>
+                        @can('product.write')
+                            <x-secondary-link :href="route('products.edit', ['type'=>'product', 'id'=> $product->id])"><i class="bi bi-pencil-fill"></i></x-secondary-link>
+                        @endcan
                     </td>
                 </tr>
             @endforeach

@@ -12,6 +12,7 @@ class ContactController extends Controller
      */
     public function index(string $vendor)
     {
+        $this->authorize('vendor.read');
         $entries = Contact::where('vendor_id', $vendor)->get();
         return view('contacts.index', compact('entries'));
     }
@@ -21,6 +22,7 @@ class ContactController extends Controller
      */
     public function create(string $vendor)
     {
+        $this->authorize('vendor.write');
         $entry = new Contact();
         $entry->vendor_id = $vendor;
         return view('contacts.create', compact('entry'));
@@ -31,6 +33,7 @@ class ContactController extends Controller
      */
     public function store(Request $request, string $vendor)
     {
+        $this->authorize('vendor.write');
         $post = new Contact();
         $post->name = $request->input("name");
         $post->vendor_id = $vendor;
@@ -55,6 +58,7 @@ class ContactController extends Controller
      */
     public function edit(string $vendor, string $id)
     {
+        $this->authorize('vendor.write');
         $entry = Contact::findOrFail($id); 
         return view('contacts.edit', compact('entry'));
     }
@@ -64,6 +68,7 @@ class ContactController extends Controller
      */
     public function update(Request $request, string $vendor, string $id)
     {
+        $this->authorize('vendor.write');
         $post = Contact::findOrFail($id);
         $post->name = $request->input("name");
         $post->phone = $request->input("phone");

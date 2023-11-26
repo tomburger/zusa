@@ -8,8 +8,10 @@
     <div class="row">
         <div class="col">
             <nav class="nav justify-content-end">
-                <x-primary-link class="me-2" :href="route('products.create', ['type'=>'category'])">{{ __('New Category') }}</x-primary-link>
-                <x-primary-link :href="route('products.create', ['type'=>'product'])">{{ __('New Product') }}</x-primary-link>
+                @can('product.write')
+                    <x-primary-link class="me-2" :href="route('products.create', ['type'=>'category'])">{{ __('New Category') }}</x-primary-link>
+                    <x-primary-link :href="route('products.create', ['type'=>'product'])">{{ __('New Product') }}</x-primary-link>
+                @endcan
             </nav>
         </div>
     </div>

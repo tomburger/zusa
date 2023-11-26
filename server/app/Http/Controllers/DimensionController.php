@@ -13,6 +13,7 @@ class DimensionController extends Controller
      */
     public function index()
     {
+        $this->authorize('dimension.read');
         $dimensions = Dimension::get();
         return view('dimensions.index', compact('dimensions'));
     }
@@ -22,6 +23,7 @@ class DimensionController extends Controller
      */
     public function create()
     {
+        $this->authorize('dimension.write');
         return view('dimensions.create');
     }
 
@@ -30,6 +32,7 @@ class DimensionController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('dimension.write');
         $post = new Dimension();
         $post->name = $request->input("name");
         if ($post->save()) {
@@ -42,6 +45,7 @@ class DimensionController extends Controller
      */
     public function show(string $id)
     {
+        $this->authorize('dimension.read');
         $dimension = Dimension::findOrFail($id); 
         return view('dimensions.show', compact('dimension'));
     }
@@ -51,6 +55,7 @@ class DimensionController extends Controller
      */
     public function edit(string $id)
     {
+        $this->authorize('dimension.write');
         $dimension = Dimension::findOrFail($id); 
         return view('dimensions.edit', compact('dimension'));
     }
@@ -60,6 +65,7 @@ class DimensionController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $this->authorize('dimension.write');
         $post = Dimension::findOrFail($id);
         $post->name = $request->input("name");
         if ($post->save()) {
@@ -69,6 +75,7 @@ class DimensionController extends Controller
 
     public function addUnit(string $id, Request $request)
     {
+        $this->authorize('dimension.write');
         $post = new UnitOfMeasure();
         $post->name = $request->input("name");
         $post->dimension_id = $id;

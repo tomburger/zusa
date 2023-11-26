@@ -23,11 +23,4 @@
             @endif
         </div>
     </div>
-
-    <div class="row">
-        <div class="col">
-            <x-secondary-link :href="route('vendors.edit', ['vendor'=>$product->vendor->id])">{{$product->vendor->name}}</x-secondary-link>
-            <x-secondary-link :href="route('dimensions.edit', ['dimension'=>$product->dimension->id])">{{$product->dimension->name}}</x-secondary-link>
-        </div>
-    </div>
 </x-app-layout>

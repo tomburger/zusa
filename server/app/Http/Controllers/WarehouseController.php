@@ -12,6 +12,7 @@ class WarehouseController extends Controller
      */
     public function index()
     {
+        $this->authorize('warehouse.read');
         $entries = Warehouse::get();
         return view('warehouses.index', compact('entries'));
     }
@@ -21,6 +22,7 @@ class WarehouseController extends Controller
      */
     public function create()
     {
+        $this->authorize('warehouse.write');
         return view('warehouses.create');
     }
 
@@ -29,6 +31,7 @@ class WarehouseController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('warehouse.write');
         $post = new Warehouse();
         $post->name = $request->input("name");
         $post->notes = $request->input("notes");
@@ -50,6 +53,7 @@ class WarehouseController extends Controller
      */
     public function edit(string $id)
     {
+        $this->authorize('warehouse.write');
         $entry = Warehouse::findOrFail($id); 
         return view('warehouses.edit', compact('entry'));
     }
@@ -59,6 +63,7 @@ class WarehouseController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $this->authorize('warehouse.write');
         $post = Warehouse::findOrFail($id);
         $post->name = $request->input("name");
         $post->notes = $request->input("notes");

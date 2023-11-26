@@ -19,35 +19,49 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-dropdown>
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            {{ __('Settings') }}
-                        </a>
-                        <ul class="dropdown-menu">
-                            <x-nav-dropdown-link :href="route('vendors.index')">
-                                {{ __('Vendors') }}
-                            </x-nav-dropdown-link>
-                            <x-nav-dropdown-link :href="route('warehouses.index')">
-                                {{ __('Warehouses') }}
-                            </x-nav-dropdown-link>
-                            <x-nav-dropdown-link :href="route('products.index')">
-                                {{ __('Products') }}
-                            </x-nav-dropdown-link>
-                        </ul>                                
-                    </x-nav-dropdown>
-                    <x-nav-dropdown>
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            {{ __('Administration') }}
-                        </a>
-                        <ul class="dropdown-menu">
-                            <x-nav-dropdown-link :href="route('users.index')">
-                                {{ __('Users') }}
-                            </x-nav-dropdown-link>
-                            <x-nav-dropdown-link :href="route('dimensions.index')">
-                                {{ __('Dimensions') }}
-                            </x-nav-dropdown-link>
-                        </ul>                                
-                    </x-nav-dropdown>
+                    @canany(['vendor.read', 'warehouse.read', 'product.read'])
+                        <x-nav-dropdown>
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ __('Settings') }}
+                            </a>
+                            <ul class="dropdown-menu">
+                                @can('vendor.read')
+                                    <x-nav-dropdown-link :href="route('vendors.index')">
+                                        {{ __('Vendors') }}
+                                    </x-nav-dropdown-link>
+                                @endcan
+                                @can('warehouse.read')
+                                    <x-nav-dropdown-link :href="route('warehouses.index')">
+                                        {{ __('Warehouses') }}
+                                    </x-nav-dropdown-link>
+                                @endcan
+                                @can('product.read')
+                                    <x-nav-dropdown-link :href="route('products.index')">
+                                        {{ __('Products') }}
+                                    </x-nav-dropdown-link>
+                                @endcan
+                            </ul>                                
+                        </x-nav-dropdown>
+                    @endcanany
+                    @canany(['user.read', 'dimension.read'])
+                        <x-nav-dropdown>
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ __('Administration') }}
+                            </a>
+                            <ul class="dropdown-menu">
+                                @can('user.read')
+                                    <x-nav-dropdown-link :href="route('users.index')">
+                                        {{ __('Users') }}
+                                    </x-nav-dropdown-link>
+                                @endcan
+                                @can('dimension.read')
+                                    <x-nav-dropdown-link :href="route('dimensions.index')">
+                                        {{ __('Dimensions') }}
+                                    </x-nav-dropdown-link>
+                                @endcan
+                            </ul>                                
+                        </x-nav-dropdown>
+                    @endcanany
                 </ul>               
                 <ul class="navbar-nav ms-auto">
                     <x-nav-dropdown>

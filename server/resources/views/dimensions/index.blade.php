@@ -8,7 +8,9 @@
     <div class="row">
         <div class="col">
             <nav class="nav justify-content-end">
-                <x-primary-link :href="route('dimensions.create')">{{ __('New Dimension') }}</x-primary-link>
+                @can('dimension.write')
+                    <x-primary-link :href="route('dimensions.create')">{{ __('New Dimension') }}</x-primary-link>
+                @endcan
             </nav>
         </div>
     </div>
@@ -31,7 +33,9 @@
                             <div class="card-body">{{ $dimension->getUnits() }}</div>
                             <div class="card-footer text-end">
                                 <x-secondary-link :href="route('dimensions.show', ['dimension'=> $dimension->id])"><i class="bi bi-eye-fill"></i></x-secondary-link>
-                                <x-secondary-link :href="route('dimensions.edit', ['dimension'=> $dimension->id])"><i class="bi bi-pencil-fill"></i></x-secondary-link>
+                                @can('dimension.write')
+                                    <x-secondary-link :href="route('dimensions.edit', ['dimension'=> $dimension->id])"><i class="bi bi-pencil-fill"></i></x-secondary-link>
+                                @endcan
                             </div>
                         </div></div>
                     @endforeach

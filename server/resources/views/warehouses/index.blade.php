@@ -8,7 +8,9 @@
     <div class="row">
         <div class="col">
             <nav class="nav justify-content-end">
-                <x-primary-link :href="route('warehouses.create')">{{ __('New Warehouse') }}</x-primary-link>
+                @can('warehouse.write')
+                    <x-primary-link :href="route('warehouses.create')">{{ __('New Warehouse') }}</x-primary-link>
+                @endcan
             </nav>
         </div>
     </div>
@@ -41,7 +43,9 @@
                                     <td>{{ $entry->name }}</td>
                                     <td>{{ substr($entry->notes, 0, 100) }}</td>
                                     <td class="text-end">
-                                        <x-secondary-link :href="route('warehouses.edit', ['warehouse'=> $entry->id])"><i class="bi bi-pencil-fill"></i></x-secondary-link>
+                                        @can('warehouse.write')
+                                            <x-secondary-link :href="route('warehouses.edit', ['warehouse'=> $entry->id])"><i class="bi bi-pencil-fill"></i></x-secondary-link>
+                                        @endcan
                                     </td>
                                 </tr>
                             @endforeach

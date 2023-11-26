@@ -15,10 +15,20 @@
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
         <div>
-            <x-input-label for="name" :value="__('Profile')" />
-            <x-dropdown-input id="profile" name="profile" :model="$user->profile" />
-            <x-input-error class="mt-2" :messages="$errors->get('name')" />
+            <x-input-label :value="__('Roles')" />
+            <div class="form-control">
+                @foreach($user->allRoles() as $role)
+                    <input type="checkbox" class="btn-check" 
+                                id="{{$role->name}}" name="{{$role->name}}" 
+                                @if ($user->hasRole($role->name))
+                                    checked
+                                @endif
+                                autocomplete="off">
+                    <label class="btn" for="{{$role->name}}">{{$role->name}}</label>
+                @endforeach
+            </div>
         </div>
+
         <div>
             <x-primary-button>{{ __('Save') }}</x-primary-button>
             <x-secondary-link href="{{ route('users.index') }}">{{ __('Cancel') }}</x-secondary-link>

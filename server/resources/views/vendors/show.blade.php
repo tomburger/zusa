@@ -18,7 +18,9 @@
             <div class="row">
                 <div class="col">
                     <nav class="nav justify-content-end">
-                        <x-primary-link :href="route('vendors.contacts.create', ['vendor'=>$vendor->id])">{{ __('New Contact') }}</x-primary-link>
+                        @can('vendor.write')
+                            <x-primary-link :href="route('vendors.contacts.create', ['vendor'=>$vendor->id])">{{ __('New Contact') }}</x-primary-link>
+                        @endcan
                     </nav>
                 </div>
             </div>

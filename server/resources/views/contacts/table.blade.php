@@ -19,7 +19,9 @@
                     <td>{{ $contact->email }}</td>
                     <td>{{ $contact->notes }}</td>
                     <td class="text-end">
-                        <x-secondary-link :href="route('vendors.contacts.edit', ['vendor'=>$contact->vendor_id,'contact'=> $contact->id])"><i class="bi bi-pencil-fill"></i></x-secondary-link>
+                        @can('vendor.write')
+                            <x-secondary-link :href="route('vendors.contacts.edit', ['vendor'=>$contact->vendor_id,'contact'=> $contact->id])"><i class="bi bi-pencil-fill"></i></x-secondary-link>
+                        @endcan
                     </td>
                 </tr>
             @endforeach

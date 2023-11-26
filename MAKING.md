@@ -114,4 +114,12 @@ relations in models (contact and vendor)
 routes for embedded resources
 views (also add show view for vendor)
 
+## Permissions
+
+Follow the instructions here: https://spatie.be/docs/laravel-permission/v6/introduction
+Explain permissions and roles
+Add permission checks to controllers and blades - explain why both
+Add migration to setup permissions and roles
+
+Discuss fixed permissions - entity/action, and flexible roles. Do we need editable roles for now?
 

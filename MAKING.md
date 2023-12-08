@@ -76,7 +76,7 @@ php artisan make:migration
 
 ## First view
 
-We first create a policies and gates
+NO, NOT THIS WAY -- We first create a policies and gates
 
 Then we create index, create and edit view
 
@@ -116,10 +116,27 @@ views (also add show view for vendor)
 
 ## Permissions
 
-Follow the instructions here: https://spatie.be/docs/laravel-permission/v6/introduction
+Follow the instructions [here](https://spatie.be/docs/laravel-permission/v6/introduction)
 Explain permissions and roles
 Add permission checks to controllers and blades - explain why both
 Add migration to setup permissions and roles
 
 Discuss fixed permissions - entity/action, and flexible roles. Do we need editable roles for now?
 
+## Creating Delivery entity - process goes other way around
+
+First create model
+
+```php
+php artisan make:model Delivery -m
+```
+
+Add permissions and role into generated migration.
+Add vendor_id, warehouse_id and created_by, updated_by and note into delivery
+Run migration.
+
+Now work on the model...
+Then on controller
+(there is a dedicated model for index view)
+
+And then create views...

@@ -51,4 +51,12 @@ Route::middleware('auth')->group(function () {
 
 Route::resource('warehouses', \App\Http\Controllers\WarehouseController::class)->middleware('auth');
 
+Route::middleware('auth')->group(function() {
+    Route::get('/deliveries', [\App\Http\Controllers\DeliveryController::class, 'index'])->name('deliveries.index');
+    Route::post('/deliveries/create', [\App\Http\Controllers\DeliveryController::class, 'create'])->name('deliveries.create');
+    Route::post('/deliveries', [\App\Http\Controllers\DeliveryController::class, 'store'])->name('deliveries.store');
+    Route::get('/deliveries/{id}', [\App\Http\Controllers\DeliveryController::class, 'show'])->name('deliveries.show');
+    Route::get('/deliveries/{id}/edit', [\App\Http\Controllers\DeliveryController::class, 'edit'])->name('deliveries.edit');
+});
+
 require __DIR__.'/auth.php';

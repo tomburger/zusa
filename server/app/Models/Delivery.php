@@ -15,6 +15,8 @@ class Delivery extends Model
         'updated_by',
         'vendor_id',
         'warehouse_id',
+        'external_reference',
+        'invoice_number',
         'notes',
     ];
     

@@ -53,9 +53,11 @@ class DeliveryController extends Controller
             'warehouse' => 'required|integer',
         ]);
         $model = new Delivery();
+        $model->created_by = $request->user()->id;
         $model->vendor_id = $request->input('vendor');
         $model->warehouse_id = $request->input('warehouse');
-        $model->created_by = $request->user()->id;
+        $model->external_reference = $request->input('external_reference');
+        $model->invoice_number = $request->input('invoice_number');
         $model->notes = $request->input('notes');
         $model->save();
         return redirect()->route('deliveries.index')->with('success', 'Delivery created.');

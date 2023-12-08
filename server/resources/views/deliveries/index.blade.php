@@ -40,11 +40,24 @@
                         <div class="col">
                             <div class="card">
                                 <div class="card-header">
-                                    {{ $delivery->created_at->format('Y-m-d H:i') }}
-                                    {{ $delivery->vendor->name }} - {{ $delivery->warehouse->name }}
+                                    <x-secondary-link :href="route('vendors.show', ['vendor'=> $delivery->vendor->id])">
+                                        {{ $delivery->vendor->name }}
+                                    </x-secondary-link>
+                                    <x-secondary-link :href="route('warehouses.edit', ['warehouse'=> $delivery->warehouse->id])">
+                                        {{ $delivery->warehouse->name }}
+                                    </x-secondary-link>
+                                    <span class="float-end">
+                                        {{ $delivery->created_at->format('Y-m-d H:i') }}
+                                    </span>
                                 </div>
                                 <div class="card-body">
-                                    {{__('Created by')}} {{ $delivery->createdBy->name }}
+                                    {{__('Created by')}}: {{ $delivery->createdBy->name }}
+                                    @if ($delivery->external_reference)
+                                        <br>{{__('External Reference')}}: {{ $delivery->external_reference }}
+                                    @endif
+                                    @if ($delivery->invoice_number)
+                                        <br>{{__('Invoice Number')}}: {{ $delivery->invoice_number }}
+                                    @endif
                                 </div>
                                 <div class="card-footer text-end">
                                     <x-secondary-link :href="route('deliveries.show', ['id'=> $delivery->id])"><i class="bi bi-eye-fill"></i></x-secondary-link>

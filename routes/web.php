@@ -57,6 +57,7 @@ Route::middleware('auth')->group(function() {
     Route::post('/deliveries', [\App\Http\Controllers\DeliveryController::class, 'store'])->name('deliveries.store');
     Route::get('/deliveries/{id}', [\App\Http\Controllers\DeliveryController::class, 'show'])->name('deliveries.show');
     Route::get('/deliveries/{id}/edit', [\App\Http\Controllers\DeliveryController::class, 'edit'])->name('deliveries.edit');
+    Route::patch('/deliveries/{id}', [\App\Http\Controllers\DeliveryController::class, 'update'])->name('deliveries.update');
 });
 
 require __DIR__.'/auth.php';

@@ -62,4 +62,21 @@ class DeliveryController extends Controller
         $model->save();
         return redirect()->route('deliveries.index')->with('success', 'Delivery created.');
     }
+
+    public function edit(string $id) {
+        $this->authorize('deliveries.write');
+        $model = Delivery::findOrFail($id);
+        return view('deliveries.edit', compact('model'));
+    }
+
+    public function update(Request $request, string $id) {
+        $this->authorize('deliveries.write');
+        $model = Delivery::findOrFail($id);
+        $model->updated_by = $request->user()->id;
+        $model->external_reference = $request->input('external_reference');
+        $model->invoice_number = $request->input('invoice_number');
+        $model->notes = $request->input('notes');
+        $model->save();
+        return redirect()->route('deliveries.index')->with('success', 'Delivery updated.');
+    }
 }

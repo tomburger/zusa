@@ -140,3 +140,5 @@ Then on controller
 (there is a dedicated model for index view)
 
 And then create views...
+
+Now I got rid of the server folder and brought it all back down.

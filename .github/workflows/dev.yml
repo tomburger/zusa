@@ -16,11 +16,9 @@ jobs:
 
       - name: Install Dependencies
         run: npm install
-        working-directory: ./server
 
       - name: Build Client Code
         run: npm run build
-        working-directory: ./server
 
       - name: FTP Deploy
         # You may pin to the exact commit or the version.
@@ -32,7 +30,6 @@ jobs:
           password: ${{ secrets.BURGERSOFTWARESFTPSECRET }}
           port: 21
           protocol: ftp
-          local-dir: server/
           server-dir: zusa.burger.software/
           exclude: | 
             **/tests/**

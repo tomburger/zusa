@@ -35,4 +35,9 @@ class Delivery extends Model
     public function updatedBy(): BelongsTo {
         return $this->belongsTo(User::class, 'updated_by');
     }
+
+    public function products() {
+        $vendors = Product::whereVendorId($this->vendor_id)->get()->pluck('name', 'id');
+        return $vendors;
+    }
 }

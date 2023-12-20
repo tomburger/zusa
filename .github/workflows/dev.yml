@@ -32,6 +32,8 @@ jobs:
           protocol: ftp
           server-dir: zusa.burger.software/
           exclude: | 
+            .git/**
+            .github/**
             **/tests/**
             **/node_modules/**
             **/vendor/**

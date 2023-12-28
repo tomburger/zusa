@@ -37,7 +37,9 @@ class Delivery extends Model
     }
 
     public function products() {
-        $vendors = Product::whereVendorId($this->vendor_id)->get()->pluck('name', 'id');
+        $vendors = Product::whereVendorId($this->vendor_id)->get()->mapWithKeys(function ($item) {
+            return [$item['id'] => "{$item['name']} ({$item['external_reference']})" ];
+        })->toArray();
         return $vendors;
     }
 }

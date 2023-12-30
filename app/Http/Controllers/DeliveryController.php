@@ -34,7 +34,7 @@ class DeliveryController extends Controller
     }
 
     public function create(Request $request) {
-        $this->authorize('deliveries.write');
+        $this->authorize('delivery.write');
         $vendor = $request->input('vendor');
         $warehouse = $request->input('warehouse');
         if (!$vendor || !$warehouse) {
@@ -47,7 +47,7 @@ class DeliveryController extends Controller
     }
 
     public function store(Request $request) {
-        $this->authorize('deliveries.write');
+        $this->authorize('delivery.write');
         $request->validate([
             'vendor' => 'required|integer',
             'warehouse' => 'required|integer',
@@ -64,13 +64,13 @@ class DeliveryController extends Controller
     }
 
     public function edit(string $id) {
-        $this->authorize('deliveries.write');
+        $this->authorize('delivery.write');
         $model = Delivery::findOrFail($id);
         return view('deliveries.edit', compact('model'));
     }
 
     public function update(Request $request, string $id) {
-        $this->authorize('deliveries.write');
+        $this->authorize('delivery.write');
         $model = Delivery::findOrFail($id);
         $model->updated_by = $request->user()->id;
         $model->external_reference = $request->input('external_reference');

@@ -15,7 +15,6 @@ class Product extends Model
         'external_reference',
         'product_category_id',
         'vendor_id',
-        'dimension_id',
     ];
 
     public function parentCategory() {
@@ -24,10 +23,6 @@ class Product extends Model
 
     public function vendor() {
         return $this->belongsTo(Vendor::class);
-    }
-
-    public function dimension() {
-        return $this->belongsTo(Dimension::class);
     }
 
     public function categoryDropdown(): DropdownModel {
@@ -40,11 +35,5 @@ class Product extends Model
         $vendors = Vendor::get()->pluck('name', 'id');
         $vendors->prepend('', '');
         return new DropdownModel($this->vendor_id, $vendors);
-    }
-
-    public function dimensionDropdown(): DropdownModel {
-        $dimensions = Dimension::get()->pluck('name', 'id');
-        $dimensions->prepend('', '');
-        return new DropdownModel($this->dimension_id, $dimensions);
     }
 }

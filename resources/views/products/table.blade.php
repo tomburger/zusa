@@ -7,7 +7,6 @@
                 <th></th>
                 <th></th>
                 <th></th>
-                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -29,7 +28,6 @@
                     <td>{{ $product->name }}</td>
                     <td>{{ $product->external_reference }}</td>
                     <td>{{ $product->vendor?->name }}</td>
-                    <td>{{ $product->dimension?->name }}</td>
                     <td class="text-end">
                         <x-secondary-link :href="route('products.show', ['type'=>'product', 'id'=> $product->id])"><i class="bi bi-eye-fill"></i></x-secondary-link>
                         @can('product.write')

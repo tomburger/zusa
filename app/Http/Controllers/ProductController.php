@@ -69,7 +69,6 @@ class ProductController extends Controller
             $post->external_reference = $request->input("external_reference");
             $post->product_category_id = $request->input("parent");
             $post->vendor_id = $request->input("vendor");
-            $post->dimension_id = $request->input("dimension");
             if ($post->save()) {
                 return $this->toParent($post->product_category_id);
             }
@@ -130,7 +129,6 @@ class ProductController extends Controller
             $post->external_reference = $request->input("external_reference");
             $post->product_category_id = $request->input("parent");
             $post->vendor_id = $request->input("vendor");
-            $post->dimension_id = $request->input("dimension");
             if ($post->save()) {
                 return $this->toParent($post->product_category_id);
             }

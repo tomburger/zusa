@@ -29,11 +29,6 @@
             <x-input-error class="mt-2" :messages="$errors->get('vendor')" />
         </div>
         <div>
-            <x-input-label for="dimension" :value="__('Dimension')" />
-            <x-dropdown-input id="dimension" name="dimension" :model="$product->dimensionDropdown()" />
-            <x-input-error class="mt-2" :messages="$errors->get('dimension')" />
-        </div>
-        <div>
             <x-primary-button>{{ __('Save') }}</x-primary-button>
             @if ($product->product_category_id)
                 <x-secondary-link href="{{ route('products.show', ['type'=>'category','id'=>$product->product_category_id]) }}">{{ __('Cancel') }}</x-secondary-link>

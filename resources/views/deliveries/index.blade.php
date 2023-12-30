@@ -61,7 +61,7 @@
                                 </div>
                                 <div class="card-footer text-end">
                                     <x-secondary-link :href="route('deliveries.show', ['id'=> $delivery->id])"><i class="bi bi-eye-fill"></i></x-secondary-link>
-                                    @can('dimension.write')
+                                    @can('delivery.write')
                                         <x-secondary-link :href="route('deliveries.edit', ['id'=> $delivery->id])"><i class="bi bi-pencil-fill"></i></x-secondary-link>
                                     @endcan
                                 </div>

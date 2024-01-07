@@ -3,13 +3,18 @@
 <div class="row">
     <div class="col">
         <x-input-label for="external_reference" :value="__('External Reference')" />
-        <x-text-input id="external_reference" name="external_reference" type="text" required autofocus autocomplete="external_reference" />
+        <x-text-input id="external_reference" name="external_reference" type="text" value="{{$model->external_reference}}" required autofocus autocomplete="external_reference" />
         <x-input-error class="mt-2" :messages="$errors->get('external_reference')" />
     </div>
     <div class="col">
         <x-input-label for="invoice_number" :value="__('Invoice Number')" />
-        <x-text-input id="invoice_number" name="invoice_number" type="text" required autofocus autocomplete="invoice_number" />
+        <x-text-input id="invoice_number" name="invoice_number" type="text" value="{{$model->invoice_number}}" required autofocus autocomplete="invoice_number" />
         <x-input-error class="mt-2" :messages="$errors->get('invoice_number')" />
+    </div>
+    <div class="col">
+        <x-input-label for="delivery_date" :value="__('Delivery Date')" />
+        <x-text-input id="delivery_date" name="delivery_date" type="date" value="{{$model->delivery_date}}" required autofocus autocomplete="delivery_date" />
+        <x-input-error class="mt-2" :messages="$errors->get('delivery_date')" />
     </div>
 </div>
 <div id="delivery-items-editor"></div>

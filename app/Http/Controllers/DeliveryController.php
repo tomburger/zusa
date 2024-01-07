@@ -58,6 +58,7 @@ class DeliveryController extends Controller
         $model->warehouse_id = $request->input('warehouse');
         $model->external_reference = $request->input('external_reference');
         $model->invoice_number = $request->input('invoice_number');
+        $model->delivery_date = $request->input('delivery_date');
         $model->notes = $request->input('notes');
         $model->save();
         return redirect()->route('deliveries.index')->with('success', 'Delivery created.');
@@ -75,6 +76,7 @@ class DeliveryController extends Controller
         $model->updated_by = $request->user()->id;
         $model->external_reference = $request->input('external_reference');
         $model->invoice_number = $request->input('invoice_number');
+        $model->delivery_date = $request->input('delivery_date');
         $model->notes = $request->input('notes');
         $model->save();
         return redirect()->route('deliveries.index')->with('success', 'Delivery updated.');

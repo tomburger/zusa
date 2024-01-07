@@ -17,6 +17,7 @@ class Delivery extends Model
         'warehouse_id',
         'external_reference',
         'invoice_number',
+        'delivery_date',
         'notes',
     ];
     

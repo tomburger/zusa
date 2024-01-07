@@ -58,6 +58,9 @@
                                     @if ($delivery->invoice_number)
                                         <br>{{__('Invoice Number')}}: {{ $delivery->invoice_number }}
                                     @endif
+                                    @if ($delivery->delivery_date)
+                                        <br>{{__('Delivery Date')}}: {{ $delivery->delivery_date }}
+                                    @endif
                                 </div>
                                 <div class="card-footer text-end">
                                     <x-secondary-link :href="route('deliveries.show', ['id'=> $delivery->id])"><i class="bi bi-eye-fill"></i></x-secondary-link>

@@ -38,9 +38,14 @@ class Delivery extends Model
     }
 
     public function products() {
-        $vendors = Product::whereVendorId($this->vendor_id)->get()->mapWithKeys(function ($item) {
-            return [$item['id'] => "{$item['name']} ({$item['external_reference']})" ];
-        })->toArray();
-        return $vendors;
+        return Product
+                    ::whereVendorId($this->vendor_id)
+                    // ->join('product_categories', 'products.product_category_id', '=', 'product_categories.id')
+                    ->get()->toJSON();
+    }
+    public function units() {
+        return UnitOfMeasure
+                    // ::join('dimensions', 'unit_of_measures.dimension_id', '=', 'dimensions.id')
+                    ::get()->toJSON();
     }
 }

@@ -18,17 +18,8 @@
     </div>
 </div>
 <div id="delivery-items-editor"></div>
-<script type="text/json" id="product-list">
-    [
-        @foreach($model->products() as $key => $label)
-            {"value":"{{$key}}", "label":"{{$label}}"}
-            @if ($loop->last)
-            @else
-            ,
-            @endif
-        @endforeach
-    ]
-</script>
+<script type="text/json" id="product-list">{!!$model->products()!!}</script>
+<script type="text/json" id="unit-list">{!!$model->units()!!}</script>
 <div>
     <x-input-label for="notes" :value="__('Notes')" />
     <x-text-area id="notes" name="notes" autofocus autocomplete="notes" />

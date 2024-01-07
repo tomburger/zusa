@@ -1,48 +1,106 @@
 import { RenderElement } from "../render";
 import "awesomplete";
+import { GetProductLabel, Product } from "./product";
 
 class DeliveryItemsEditor {
+    private counter: number = 0;
+    private products: Product[] = [];
+    private usedProducts: number[] = [];
     constructor(private element: HTMLElement) {
-        // constructor implementation
+        const productList = document.getElementById("product-list");
+        this.products = productList && JSON.parse(productList.innerText) || [];
     }
     Bind() {
         this.Render();
-        this.BindAutocomplete();
+        this.BindControls();
     }
     private Render() {
         const content = <div class="delivery-items-editor">
-            <div class="product-rows">
+            <div class="row mb-3">
+                <h3>Delivery Items</h3>
             </div>
-            <div class="new-product">
-                <input type="text" class="form-control" id="deliveryItems" name="deliveryItems" placeholder="Select product..." />
+            <div class="product-rows"></div>
+            <div class="new-product row">
+                <div class="col-1">
+                    <label class="form-label me-2" for="selectedProduct">Product</label>
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" id="selectedProduct" name="selectedProduct" placeholder="Select product..." />
+                    <span class="ms-2 me-2">or</span>
+                    <span>
+                        <a href="#" id="addNewProduct" class="btn btn-primary">Create new</a>
+                    </span>
+                </div>
             </div>
         </div>
         this.element.innerHTML = content;
     }
-    private BindAutocomplete() {
-        const products = document.getElementById("product-list");
-        if (products) {
-            const list = JSON.parse(products.innerText);
-            const input = this.element.querySelector("#deliveryItems") as HTMLInputElement;
-            const autocomplete = new Awesomplete(input, {
-                list: list,
-            });
-            input.addEventListener("awesomplete-selectcomplete", (event: any) => {
-                this.RenderProductRow(event.text);
-                input.value = "";
+    private BindControls() {
+        const input = this.element.querySelector("#selectedProduct") as HTMLInputElement;
+        const autocomplete = new Awesomplete(input, {
+            list: this.products,
+            data: (item: Product) => [GetProductLabel(item), item.id],
+            filter: (item: any, text: string) => this.usedProducts.indexOf(item.value) < 0 && Awesomplete.FILTER_CONTAINS(item, text),
+        });
+        input.addEventListener("awesomplete-selectcomplete", (event: any) => {
+            this.usedProducts.push(event.text.value);
+            this.RenderProductRow(event.text.value);
+            input.value = "";
+        });
+        const button = document.getElementById("addNewProduct");
+        if (button) {
+            button.addEventListener("click", (event) => {
+                event.preventDefault();
+                this.RenderProductRow(null);
             });
         }
     }
-    private RenderProductRow(product: { id: string, label: string }) {
-        const row = <div class="product-row row">
-            <input type="hidden" name="products[]" value={product.id} />
-            <div class="col product-name">{product.label}</div>
+    private RenderProductRow(productId: number | null) {
+        this.counter++;
+        const product = this.products.find(p => p.id == productId);
+        const row = <div class="product-row row mb-3" data-counter={this.counter}>
+            <div class="col-1">{this.counter}</div>
+            {product 
+                ? <div class="col-3"><input type="text" class="form-control" name="names[]" disabled
+                            value={`${product.name} (${product.id})`} /></div>
+                : <div class="col-3"><input type="text" class="form-control" name="names[]" value="" placeholder="Product name" /></div>}
+            {product 
+                ? <div class="col-1"><input type="text" class="form-control" name="names[]" disabled value={product.external_reference} /></div>
+                : <div class="col-1"><input type="text" class="form-control" name="names[]" value="" placeholder="External Reference" /></div>}
             <div class="col">
-                <input type="number" class="form-control" name="quantities[]" value="1" />
+                <input type="number" class="form-control" name="quantities[]" value="" placeholder="Quantity" />
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" name="units[]" value="" placeholder="Unit" />
+            </div>
+            <div class="col">
+                <input type="number" class="form-control" name="prices[]" value="" placeholder="Price" />
+            </div>
+            <div class="col">
+                <a class="btn btn-secondary delete-button" href="#"><i class="bi bi-trash"></i></a>
             </div>
         </div>
         const rows = this.element.querySelector(".product-rows") as HTMLElement;
         rows.insertAdjacentHTML('beforeend', row);
+
+        const rowElement = rows.querySelector(`[data-counter="${this.counter}"]`) as HTMLElement;
+
+        const deleteButton = rowElement.querySelector(".delete-button") as HTMLElement;
+        deleteButton.addEventListener("click", (event) => {
+            event.preventDefault();
+            if (productId) { 
+                const index = this.usedProducts.indexOf(productId);
+                if (index >= 0) {
+                    this.usedProducts.splice(index, 1);
+                }
+            }
+            rowElement.remove();
+        });
+
+        const input = product 
+                        ? rowElement.querySelector("input[name='quantities[]']") as HTMLInputElement
+                        : rowElement.querySelector("input[name='names[]']") as HTMLInputElement;
+        input.focus();
     }
 }
 

@@ -5,15 +5,15 @@
         </h2>
     </x-slot>
 
-    <div class="row">
-        <dlv class="col">
-            {{__('Vendor')}}: {{$model->vendor->name}}
-        </dlv>
-    </div>
     <div class="row mb-4">
-        <dlv class="col">
-            {{__('Warehouse')}}: {{$model->warehouse->name}}
-        </dlv>
+        <div class="col">
+            {{__('Vendor')}}<br/>
+            <b>{{$model->vendor->name}}</b>
+        </div>
+        <div class="col">
+            {{__('Warehouse')}}<br/>
+            <b>{{$model->warehouse->name}}</b>
+        </div>
     </div>
 
     <form method="post" action="{{ route('deliveries.store') }}">

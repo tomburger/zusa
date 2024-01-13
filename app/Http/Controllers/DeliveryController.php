@@ -2,34 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DropdownModel;
 use Illuminate\Http\Request;
 use App\Models\Delivery;
-use App\Models\Vendor;
-use App\Models\Warehouse;
-
-class DeliveryIndexModel {
-    public function vendors(): DropdownModel {
-        $vendors = Vendor::get()->pluck('name', 'id');
-        $vendors->prepend(__('=== select vendor ==='), '');
-        return new DropdownModel(null, $vendors);
-    }
-
-    public function warehouses(): DropdownModel {
-        $warehouses = Warehouse::get()->pluck('name', 'id');
-        $warehouses->prepend(__('=== select warehouse ==='), '');
-        return new DropdownModel(null, $warehouses);
-    }
-
-    public function deliveries() {
-        return Delivery::latest()->take(5)->with(['vendor', 'warehouse', 'createdBy', 'updatedBy'])->get();
-    }
-}
+use App\Models\DeliveryIndex;
+use App\Services\DeliveryItemsService;
 
 class DeliveryController extends Controller
 {
+    private DeliveryItemsService $deliveryItems;
+
+    public function __construct(DeliveryItemsService $deliveryItems) {
+        $this->deliveryItems = $deliveryItems;
+    }
+
     public function index() {
-        $model = new DeliveryIndexModel();
+        $model = new DeliveryIndex();
         return view('deliveries.index', compact('model'));
     }
 
@@ -61,6 +48,12 @@ class DeliveryController extends Controller
         $model->delivery_date = $request->input('delivery_date');
         $model->notes = $request->input('notes');
         $model->save();
+
+        $items = $request->input('delivery_items');
+        if ($items) {
+            $this->deliveryItems->update($model, $items);
+        }
+
         return redirect()->route('deliveries.index')->with('success', 'Delivery created.');
     }
 
@@ -79,6 +72,12 @@ class DeliveryController extends Controller
         $model->delivery_date = $request->input('delivery_date');
         $model->notes = $request->input('notes');
         $model->save();
+
+        $items = $request->input('delivery_items');
+        if ($items) {
+            $this->deliveryItems->update($model, $items);
+        }
+
         return redirect()->route('deliveries.index')->with('success', 'Delivery updated.');
     }
 }

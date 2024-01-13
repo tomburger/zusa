@@ -16,7 +16,7 @@
         </div>
         <div>
             <x-input-label for="notes" :value="__('Notes')" />
-            <x-text-area id="notes" name="notes" required autofocus autocomplete="notes">{{$vendor->notes}}</x-text-area>
+            <x-text-area id="notes" name="notes" autofocus autocomplete="notes">{{$vendor->notes}}</x-text-area>
             <x-input-error class="mt-2" :messages="$errors->get('notes')" />
         </div>
         <div>

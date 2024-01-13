@@ -20,6 +20,7 @@
 <div id="delivery-items-editor"></div>
 <script type="text/json" id="product-list">{!!$model->products()!!}</script>
 <script type="text/json" id="unit-list">{!!$model->units()!!}</script>
+<div><textarea style="display: none; width: 100%; height: 200px;" id="delivery_items" name="delivery_items"></textarea></div>
 <div>
     <x-input-label for="notes" :value="__('Notes')" />
     <x-text-area id="notes" name="notes" autofocus autocomplete="notes" />

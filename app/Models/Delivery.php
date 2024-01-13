@@ -37,6 +37,10 @@ class Delivery extends Model
         return $this->belongsTo(User::class, 'updated_by');
     }
 
+    public function items() {
+        return $this->hasMany(DeliveryItem::class);
+    }
+
     public function products() {
         return Product
                     ::whereVendorId($this->vendor_id)

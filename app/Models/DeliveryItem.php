@@ -20,4 +20,12 @@ class DeliveryItem extends Model {
     public function delivery() {
         return $this->belongsTo(Delivery::class);
     }
+
+    public function product() {
+        return $this->belongsTo(Product::class);
+    }
+
+    public function unit() {
+        return $this->belongsTo(UnitOfMeasure::class);
+    }
 }

@@ -41,15 +41,7 @@ class Delivery extends Model
         return $this->hasMany(DeliveryItem::class);
     }
 
-    public function products() {
-        return Product
-                    ::whereVendorId($this->vendor_id)
-                    // ->join('product_categories', 'products.product_category_id', '=', 'product_categories.id')
-                    ->get()->toJSON();
-    }
-    public function units() {
-        return UnitOfMeasure
-                    // ::join('dimensions', 'unit_of_measures.dimension_id', '=', 'dimensions.id')
-                    ::get()->toJSON();
+    public function total_price() {
+        return $this->items()->sum('price');
     }
 }

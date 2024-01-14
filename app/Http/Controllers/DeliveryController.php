@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Delivery;
+use App\Models\DeliveryModel;
 use App\Models\DeliveryIndex;
 use App\Services\DeliveryItemsService;
 
@@ -27,7 +28,7 @@ class DeliveryController extends Controller
         if (!$vendor || !$warehouse) {
             return redirect()->route('deliveries.index')->with('error', 'Please select a vendor and a warehouse.');
         }
-        $model = new Delivery();
+        $model = new DeliveryModel();
         $model->vendor_id = $vendor;
         $model->warehouse_id = $warehouse;
         return view('deliveries.create', compact('model'));
@@ -59,7 +60,16 @@ class DeliveryController extends Controller
 
     public function edit(string $id) {
         $this->authorize('delivery.write');
-        $model = Delivery::findOrFail($id);
+        $delivery = Delivery::findOrFail($id);
+        $model = new DeliveryModel();
+        $model->id = $delivery->id;
+        $model->vendor_id = $delivery->vendor_id;
+        $model->warehouse_id = $delivery->warehouse_id;
+        $model->external_reference = $delivery->external_reference;
+        $model->invoice_number = $delivery->invoice_number;
+        $model->delivery_date = $delivery->delivery_date;
+        $model->notes = $delivery->notes || '';
+        $model->delivery_items = $this->deliveryItems->get($delivery->id);
         return view('deliveries.edit', compact('model'));
     }
 

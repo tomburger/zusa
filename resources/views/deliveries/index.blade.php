@@ -46,8 +46,11 @@
                                     <x-secondary-link :href="route('warehouses.edit', ['warehouse'=> $delivery->warehouse->id])">
                                         {{ $delivery->warehouse->name }}
                                     </x-secondary-link>
-                                    <span class="float-end">
+                                    <span>
                                         {{ $delivery->created_at->format('Y-m-d H:i') }}
+                                    </span>
+                                    <span class="float-end">
+                                        {{ number_format($delivery->total_price(), 2) }}
                                     </span>
                                 </div>
                                 <div class="card-body">

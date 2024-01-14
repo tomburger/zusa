@@ -149,6 +149,15 @@ introducing service layer for DeliveryItems
 
 Start with tests
 https://marketplace.visualstudio.com/items?itemName=recca0120.vscode-phpunit
+(remember to turn in memory database in phpunit.xml)
 
+```xml
+<env name="DB_CONNECTION" value="sqlite"/> 
+<env name="DB_DATABASE" value=":memory:"/> 
+```
+
+Now it needs DeliveryModel to have JSON property and is separated from Delivery "entity class".
+
+Then entire functionality can be developed within DeliveryItemsService using pure TDD
 
 

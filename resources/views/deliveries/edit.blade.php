@@ -8,11 +8,11 @@
     <div class="row mb-4">
         <div class="col">
             {{__('Vendor')}}<br/>
-            <b>{{$model->vendor->name}}</b>
+            <b>{{$model->vendorName()}}</b>
         </div>
         <div class="col">
             {{__('Warehouse')}}<br/>
-            <b>{{$model->warehouse->name}}</b>
+            <b>{{$model->warehouseName()}}</b>
         </div>
     </div>
 

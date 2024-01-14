@@ -1,7 +1,7 @@
 import { RenderElement } from "../render";
 import "awesomplete";
 import { GetProductLabel, Product } from "./product";
-import { DeliveryItemsData } from "./data";
+import { DeliveryItem, DeliveryItemsData } from "./data";
 
 class DeliveryItemsEditor {
     private counter: number = 0;
@@ -16,6 +16,10 @@ class DeliveryItemsEditor {
     }
     Bind() {
         this.Render();
+        this.data.GetValues().forEach((item, index) => {
+            this.usedProducts.push(item.product_id);
+            this.RenderExistingRow(item, index);
+        });
         this.BindControls();
     }
     private Render() {
@@ -50,7 +54,7 @@ class DeliveryItemsEditor {
             this.usedProducts.push(event.text.value);
             const product = this.products.find(p => p.id == event.text.value);
             const index = this.data.AddRow(product)
-            this.RenderProductRow(index, product);
+            this.RenderCreatedRow(index, product);
             input.value = "";
         });
         const button = document.getElementById("addNewProduct");
@@ -58,29 +62,44 @@ class DeliveryItemsEditor {
             button.addEventListener("click", (event) => {
                 event.preventDefault();
                 const index = this.data.AddRow(undefined);
-                this.RenderProductRow(index);
+                this.RenderCreatedRow(index);
             });
         }
     }
-    private RenderProductRow(index: number, product: Product | undefined = undefined) {
+    private RenderExistingRow(item: DeliveryItem, index: number) {
+        const product = this.products.find(p => p.id == item.product_id);
+        this.RenderProductRow(index, product, item.quantity, item.unit, item.price);
+    }
+    private RenderCreatedRow(index: number, product: Product | undefined = undefined) {
+        const rowElement = this.RenderProductRow(index, product);
+
+        const input = product 
+                        ? rowElement.querySelector("input[name='quantities[]']") as HTMLInputElement
+                        : rowElement.querySelector("input[name='product_names[]']") as HTMLInputElement;
+        input.focus();
+    }
+    private RenderProductRow(
+                index: number, product: Product | undefined = undefined,
+                quantity: number = 0, unit: string = "", price: number = 0
+    ) {
         this.counter++;
         const row = <div class="product-row row mb-3" data-counter={this.counter} data-index={index}>
             <div class="col-1">{this.counter}</div>
             {product 
                 ? <div class="col-3"><input type="text" class="form-control" name="product_names[]" disabled
-                            value={`${product.name} (${product.id})`} /></div>
+                            value={product.name} /></div>
                 : <div class="col-3"><input type="text" class="form-control" name="product_names[]" value="" placeholder="Product name" /></div>}
             {product 
                 ? <div class="col-1"><input type="text" class="form-control" name="external_references[]" disabled value={product.external_reference} /></div>
                 : <div class="col-1"><input type="text" class="form-control" name="external_references[]" value="" placeholder="External Reference" /></div>}
             <div class="col">
-                <input type="number" class="form-control" name="quantities[]" value="" placeholder="Quantity" />
+                <input type="number" class="form-control" name="quantities[]" value={quantity} placeholder="Quantity" />
             </div>
             <div class="col">
-                <input type="text" class="form-control" name="units_of_measure[]" value="" placeholder="Unit" />
+                <input type="text" class="form-control" name="units_of_measure[]" value={unit} placeholder="Unit" />
             </div>
             <div class="col">
-                <input type="number" class="form-control" name="prices[]" value="" placeholder="Price" />
+                <input type="number" class="form-control" name="prices[]" value={price} placeholder="Price" />
             </div>
             <div class="col">
                 <a class="btn btn-secondary delete-button" href="#"><i class="bi bi-trash"></i></a>
@@ -111,10 +130,7 @@ class DeliveryItemsEditor {
             });
         });
 
-        const input = product 
-                        ? rowElement.querySelector("input[name='quantities[]']") as HTMLInputElement
-                        : rowElement.querySelector("input[name='product_names[]']") as HTMLInputElement;
-        input.focus();
+        return rowElement;
     }
 }
 

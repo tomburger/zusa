@@ -93,13 +93,13 @@ class DeliveryItemsEditor {
                 ? <div class="col-1"><input type="text" class="form-control" name="external_references[]" disabled value={product.external_reference} /></div>
                 : <div class="col-1"><input type="text" class="form-control" name="external_references[]" value="" placeholder="External Reference" /></div>}
             <div class="col">
-                <input type="number" class="form-control" name="quantities[]" value={quantity} placeholder="Quantity" />
+                <input type="number" step="0.0001" class="form-control" name="quantities[]" value={quantity} placeholder="Quantity" />
             </div>
             <div class="col">
                 <input type="text" class="form-control" name="units_of_measure[]" value={unit} placeholder="Unit" />
             </div>
             <div class="col">
-                <input type="number" class="form-control" name="prices[]" value={price} placeholder="Price" />
+                <input type="number" step="0.01" class="form-control" name="prices[]" value={price} placeholder="Price" />
             </div>
             <div class="col">
                 <a class="btn btn-secondary delete-button" href="#"><i class="bi bi-trash"></i></a>

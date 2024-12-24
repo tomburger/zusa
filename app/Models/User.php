@@ -54,7 +54,6 @@ class UserUi {
     public string $name;
     public string $email;
     public bool $active;
-    public bool $admin;
     public DropdownModel $profile;
 
     public function __construct(User $user)
@@ -63,7 +62,6 @@ class UserUi {
         $this->name = $user->name;
         $this->email = $user->email;
         $this->active = $user->active;
-        $this->admin = $user->admin;
     }
 
     public function allRoles()

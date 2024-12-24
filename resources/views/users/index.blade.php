@@ -25,7 +25,6 @@
                                 <th>{{ __('Name') }}</th>
                                 <th>{{ __('Email') }}</th>
                                 <th>{{ __('Active') }}</th>
-                                <th>{{ __('Admin') }}</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -39,11 +38,6 @@
                                     	<td class="bg-success"><i class="bi bi-check-square"></i></td>
                                     @else
                                         <td class="bg-warning"><i class="bi bi-check-square"></i></td>
-                                    @endif
-                                    @if ($user->admin)
-                                    	<td class="bg-success"><i class="bi bi-check-square"></i></td>
-                                    @else
-                                        <td></td>
                                     @endif
                                     <td class="text-end">
                                         @can('user.write')

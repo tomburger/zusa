@@ -36,4 +36,11 @@ class Product extends Model
         $vendors->prepend('', '');
         return new DropdownModel($this->vendor_id, $vendors);
     }
+
+    public function latestPrice() {
+        return $this->hasMany(DeliveryItem::class, 'product_id')
+                    ->join('deliveries', 'delivery_items.delivery_id', '=', 'deliveries.id')
+                    ->orderBy('delivery_date', 'desc')
+                    ->first();
+    }
 }

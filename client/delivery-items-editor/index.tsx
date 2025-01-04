@@ -27,7 +27,16 @@ class DeliveryItemsEditor {
             <div class="row mb-3">
                 <h3>Delivery Items</h3>
             </div>
-            <div class="product-rows"></div>
+            <div class="product-rows">
+                <div class="product-header row mb-3 bg-light p-1">
+                    <div class="col-1">No.</div>
+                    <div class="col-3">Product</div>
+                    <div class="col-1">External Reference</div>
+                    <div class="col">Quantity</div>
+                    <div class="col">Unit</div>
+                    <div class="col">Price</div>
+                </div>
+            </div>
             <div class="new-product row">
                 <div class="col-1">
                     <label class="form-label me-2" for="selectedProduct">Product</label>
@@ -71,7 +80,7 @@ class DeliveryItemsEditor {
         this.RenderProductRow(index, product, item.quantity, item.unit, item.price);
     }
     private RenderCreatedRow(index: number, product: Product | undefined = undefined) {
-        const rowElement = this.RenderProductRow(index, product);
+        const rowElement = this.RenderProductRow(index, product, 0, "", (product && parseFloat(product.latest_price)) || 0);
 
         const input = product 
                         ? rowElement.querySelector("input[name='quantities[]']") as HTMLInputElement
@@ -80,8 +89,7 @@ class DeliveryItemsEditor {
     }
     private RenderProductRow(
                 index: number, product: Product | undefined = undefined,
-                quantity: number = 0, unit: string = "", price: number = 0
-    ) {
+                quantity: number, unit: string, price: number) {
         this.counter++;
         const row = <div class="product-row row mb-3" data-counter={this.counter} data-index={index}>
             <div class="col-1">{this.counter}</div>

@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Facades\DB;
+
 class DeliveryModel {
     public int $id; 
 
@@ -43,6 +45,7 @@ class DeliveryModel {
         return Product
                     ::whereVendorId($this->vendor_id)
                     // ->join('product_categories', 'products.product_category_id', '=', 'product_categories.id')
+                    ->select('products.id', 'products.name', 'products.external_reference', DB::raw('(SELECT di.price FROM delivery_items di JOIN deliveries d ON di.delivery_id = d.id WHERE di.product_id = products.id ORDER BY d.delivery_date DESC LIMIT 1) as latest_price'))
                     ->get()->toJSON();
     }
 
